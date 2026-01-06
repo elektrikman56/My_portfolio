@@ -57,6 +57,9 @@ body {
     margin: 0;
     text-transform: uppercase;
 }
+.project-details ul { list-style: none; padding: 0; }
+.project-details li { margin-bottom: 10px; padding-left: 25px; position: relative; }
+.project-details li::before { content: "🌐"; position: absolute; left: 0; }
 
 .header-subtitle {
     margin: 5px 0 0 0;
