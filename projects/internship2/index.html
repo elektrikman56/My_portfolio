@@ -18,35 +18,66 @@
                 <h1 class="header-name">INTERNSHIP 2</h1>
                 <p class="header-subtitle">Planning and Drawing Projects</p>
             </div>
+            <div class="power-switch-container">
+                <label class="switch">
+                    <input type="checkbox" id="power-toggle"> 
+                    <span class="slider"></span>
+                </label>
+                <span class="switch-text" id="switch-status">PLUG IN</span>
+            </div>
         </div>
     </nav>
 
     <main class="content-wrapper">
         <article class="project-details">
-            <h2>Staj Deneyimi: Planlama ve Projelendirme</h2>
+            <h2>Electrical Design & Infrastructure</h2>
             <p>
-                İkinci staj dönemimde, teknik projelerin planlama aşamalarından çizim süreçlerine kadar 
-                geniş bir yelpazede görev aldım. Mühendislik projelerinin hayata geçirilmeden önce 
-                hazırlanan teknik resimleri ve saha uygulama planları üzerinde yoğunlaştım.
+                During my internship, I focused on the design and technical auditing of electrical systems 
+                for public buildings. This experience allowed me to apply engineering standards to real-world 
+                infrastructure, specifically through advanced AutoCAD implementation.
             </p>
             
-            <p>
-                Bu süreçte proje okuma, AutoCAD veya benzeri teknik çizim programları kullanarak 
-                revizyonlar yapma ve iş takvimine uygun planlama stratejileri geliştirme konularında 
-                tecrübe edindim. Saha ekipleri ile ofis arasındaki koordinasyonun nasıl sağlandığını 
-                yakından gözlemledim.
-            </p>
+            <h3>
+                Electrical Systems & AutoCAD Design
+            </h3>
+            <article class="project-sub-section">
+                <div class="project-main-content">
+                    <div class="project-description">
+                        <p>
+                            During my internship at Pendik Municipality, I took an active role in transforming 
+                            architectural blueprints into functional electrical projects by managing specialized 
+                            layers for lighting, power, and low-current systems. My work involved designing 
+                            comprehensive floor plans where I calculated Load Schedules to ensure phase balance 
+                            and determined appropriate breaker values for high-power industrial equipment. 
+                            Every design was verified through rigorous voltage drop and current-carrying capacity 
+                            calculations, ensuring compliance with the 1.5% statutory limit for safety and 
+                            efficiency.
+                        </p>
+                    </div>
 
-            <div class="project-images">
-                <img src="../../photos/intern2.webp" alt="Internship 2 Experience">
-            </div>
+                    <div class="project-images-vertical">
+                        <img src="../../photos/intern22.webp" alt="Internship 2 Experience">
+                    </div>
+                </div>
+            </article>
 
-            <h2>Teknik Yetkinlikler</h2>
+            <section class="project-triple-row">
+                <div class="triple-item">
+                    <img src="../../photos/intern21.webp" alt="Earthing Design">
+                </div>
+                <div class="triple-item">
+                    <img src="../../photos/intern23.webp" alt="Technical Calculations">
+                </div>
+            </section>
+
+            <h3>Safety Systems & Infrastructure Auditing</h3>
             <p>
-                Projelerin standartlara uygun şekilde çizilmesi, keşif ve metraj çalışmalarının 
-                yürütülmesi gibi mühendislik disiplini gerektiren alanlarda aktif olarak yer aldım. 
-                Bu deneyim, teorik bilgilerin profesyonel iş hayatındaki pratik karşılığını 
-                görmemi sağladı.
+                A core component of my internship was engineering Earthing and Lightning Protection systems. 
+                Following the national earthing regulations, I designed earthing grids using galvanized strips 
+                and electrodes, calculating their placement to achieve a spread resistance of less than 2Ω 
+                to guarantee human safety. Furthermore, I conducted technical reviews of Reactive Power 
+                Compensation units and Solar Power Systems, focusing on their integration into urban grids 
+                to optimize energy performance.
             </p>
         </article>
     </main>
@@ -59,5 +90,31 @@
             </div>
         </div>
     </footer>
+    <script>
+        const toggle = document.getElementById('power-toggle');
+        const statusText = document.getElementById('switch-status');
+
+        // 1. HAFIZAYI KONTROL ET: Sayfa açıldığında daha önce basılmış mı bak
+        const systemState = localStorage.getItem('portfolio-power');
+
+        if (systemState === 'on') {
+            toggle.checked = true;
+            document.body.classList.add('system-on');
+            statusText.innerText = "PLUG OUT";
+        }
+
+        // 2. DÜĞMEYE BASILDIĞINDA: Hem sınıfı ekle hem hafızaya yaz
+        toggle.addEventListener('change', function() {
+            if (this.checked) {
+                document.body.classList.add('system-on');
+                statusText.innerText = "PLUG OUT";
+                localStorage.setItem('portfolio-power', 'on'); // Hafızaya al
+            } else {
+                document.body.classList.remove('system-on');
+                statusText.innerText = "PLUG IN";
+                localStorage.setItem('portfolio-power', 'off'); // Hafızaya al
+            }
+        });
+    </script>
 </body>
 </html>

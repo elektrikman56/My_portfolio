@@ -18,43 +18,66 @@
                 <h1 class="header-name">REDAP PROTOCOL</h1>
                 <p class="header-subtitle">Custom Data Transfer Protocol Design</p>
             </div>
+            <div class="power-switch-container">
+                <label class="switch">
+                    <input type="checkbox" id="power-toggle"> 
+                    <span class="slider"></span>
+                </label>
+                <span class="switch-text" id="switch-status">PLUG IN</span>
+            </div>
         </div>
     </nav>
 
     <main class="content-wrapper">
         <article class="project-details">
-            <h2>Proje Amacı</h2>
+            <h2>ReDaP: Reliable Datagram Protocol Design & Implementation</h2>
             <p>
-                Bu çalışma, bilgisayar ağlarının temelini oluşturan <strong>OSI ve TCP/IP</strong> modellerini pratik bir şekilde 
-                deneyimlemek amacıyla yürütülmüştür. Projenin ana çıktısı, ağ üzerindeki iki uç nokta arasında güvenilir dosya 
-                alışverişini sağlayan, özgün kurallar setine sahip <strong>REDAP</strong> adlı veri iletişim protokolüdür.
+                ReDaP is a lightweight, reliable transport layer protocol built on top of UDP, 
+                designed to bridge the gap between the speed of connectionless protocols and the 
+                reliability of TCP. This project involved defining a custom RFC (Request for Comments) 
+                specification and implementing a complete Sender/Receiver architecture in Python. The 
+                protocol is optimized for experimental and real-time applications where low overhead is 
+                critical, but data integrity must be guaranteed.            
             </p>
 
+            <h3>Technical Architecture & Protocol Specifications</h3>
             
-
-            <h2>Teknik Altyapı ve Veri Akışı</h2>
-            <p>
-                REDAP protokolü, internet katmanları arasındaki veri paketleme (encapsulation) ve hata kontrol mekanizmalarını 
-                baz alarak şu prensipler üzerine inşa edilmiştir:
-            </p>
             <ul>
-                <li><strong>Hata Kontrolü (ACK/NACK):</strong> Verinin alıcıya ulaşıp ulaşmadığını doğrulamak için "Acknowledgement" (ACK) ve hata durumunda "Negative Acknowledgement" (NACK) sinyalleri kullanılmıştır.</li>
-                <li><strong>Paketleme Yapısı:</strong> Gönderilen dosyalar parçalara ayrılarak her birine başlık (header) ve hata kontrol kodu (checksum) eklenmiş, alıcı tarafta bu parçaların doğru sırada birleştirilmesi sağlanmıştır.</li>
-                <li><strong>Akış Kontrolü:</strong> Ağdaki tıkanıklığı önlemek ve veri kaybını minimize etmek için akış kontrol algoritmaları protokole entegre edilmiştir.</li>
+                <li><strong>Reliability Mechanism:</strong> Implemented a Stop-and-Wait ARQ (Automatic Repeat Request) 
+                mechanism, ensuring that only one unacknowledged data packet is in flight at any time to prevent data loss.</li>
+                <li><strong>Error Detection:</strong> Developed a 16-bit one’s complement checksum algorithm that validates data 
+                integrity at the word level; corrupted packets are automatically discarded and triggered for 
+                retransmission via NACK or timeout.</li>
+                <li><strong>Packet Structure:</strong> Designed a custom 10-byte fixed header comprising Message Type 
+                (DATA, ACK, NACK), Flags (LAST, RETRANSMIT), Sequence Numbers, and Checksum fields.</li>
+                <li><strong>Sequencing & Flow:</strong> Utilized 16-bit sequence numbers to handle packet ordering and 
+                wrap-around logic, allowing for the reliable transmission of large files by splitting them into 512-byte 
+                payload chunks.</li>
+                <li><strong>Dynamic Retransmission:</strong> Engineered a timeout-based system (suggested at 500ms) with 
+                a maximum retry limit (5 retries) to handle network congestion or packet drops effectively.</li>
             </ul>
 
             
+            <div class="project-sender-receiver">
+                <div class="terminal-sender">
+                    <img src="../../photos/sender.png" alt="REDAP Protocol Sender">
+                </div>
 
-            <div class="project-images">
-                <img src="../../photos/redap_project.jpg" alt="REDAP Protocol Architecture">
+                <div class="terminal-receiver">
+                    <img src="../../photos/receiver.png" alt="REDAP Protocol Receiver">
+                </div>
             </div>
 
-            <h2>Kazanımlar</h2>
-            <p>
-                Bu ders ve proje sayesinde, paket anahtarlamalı ağların nasıl çalıştığını, TCP'nin güvenilirlik mantığını ve 
-                UDP ile arasındaki farkları derinlemesine kavradım. Kendi protokolümüzü (REDAP) sıfırdan üretmek, 
-                düşük seviyeli (low-level) network programlama ve veri güvenliği konularında temel oluşturmuştur.
-            </p>
+            <h3>Software Implementation (Python)</h3>
+            <ul>
+                <li><strong>Socket Programming:</strong> Developed asynchronous communication scripts using Python’s 
+                socket and struct libraries to handle raw UDP datagrams and binary header packing/unpacking.</li>
+                <li><strong>Performance Metrics:</strong> The implementation tracks and reports real-time statistics, 
+                including throughput (KB/s), retransmission counts, and total elapsed time to evaluate network 
+                efficiency.</li>
+                <li><strong>User Interface:</strong> Integrated a tkinter file-dialog system in the Sender module to 
+                allow seamless selection and transmission of any file type across the ReDaP network.</li>
+            </ul>
         </article>
     </main>
 
@@ -66,5 +89,31 @@
             </div>
         </div>
     </footer>
+    <script>
+        const toggle = document.getElementById('power-toggle');
+        const statusText = document.getElementById('switch-status');
+
+        // 1. HAFIZAYI KONTROL ET: Sayfa açıldığında daha önce basılmış mı bak
+        const systemState = localStorage.getItem('portfolio-power');
+
+        if (systemState === 'on') {
+            toggle.checked = true;
+            document.body.classList.add('system-on');
+            statusText.innerText = "PLUG OUT";
+        }
+
+        // 2. DÜĞMEYE BASILDIĞINDA: Hem sınıfı ekle hem hafızaya yaz
+        toggle.addEventListener('change', function() {
+            if (this.checked) {
+                document.body.classList.add('system-on');
+                statusText.innerText = "PLUG OUT";
+                localStorage.setItem('portfolio-power', 'on'); // Hafızaya al
+            } else {
+                document.body.classList.remove('system-on');
+                statusText.innerText = "PLUG IN";
+                localStorage.setItem('portfolio-power', 'off'); // Hafızaya al
+            }
+        });
+    </script>
 </body>
 </html>

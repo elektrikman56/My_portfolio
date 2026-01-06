@@ -18,39 +18,70 @@
                 <h1 class="header-name">VEHICLE DETECTION & COUNTING</h1>
                 <p class="header-subtitle">MATLAB Image Processing App</p>
             </div>
+            <div class="power-switch-container">
+                <label class="switch">
+                    <input type="checkbox" id="power-toggle"> 
+                    <span class="slider"></span>
+                </label>
+                <span class="switch-text" id="switch-status">PLUG IN</span>
+            </div>
         </div>
     </nav>
 
     <main class="content-wrapper">
         <article class="project-details">
-            <h2>Proje Genel Bakış</h2>
+            <h2>Vehicle Detection & Counting with Image Processing</h2>
             <p>
-                Bu proje, video akışı üzerinden hareketli nesneleri (araçları) gerçek zamanlı olarak tespit etmek ve saymak amacıyla 
-                <strong>MATLAB</strong> ortamında geliştirilmiştir. Görüntü işleme algoritmaları kullanılarak, karmaşık video kareleri 
-                anlamlı verilere dönüştürülmüştür.
+                This project focuses on the development of an automated system designed to detect and count 
+                moving vehicles from a video stream in real-time. Developed using the MATLAB environment, the 
+                system transforms raw video frames into actionable traffic data through a series of digital 
+                image processing stages. The project demonstrates the practical application of computer vision 
+                in solving real-world engineering challenges, such as urban traffic monitoring and infrastructure 
+                planning.
             </p>
             
-            <h2>Algoritma ve Çalışma Mantığı</h2>
+            <h3>Technical Implementation & Methodology</h3>
             <p>
-                Projenin temelinde yatan mantık, araçların arka plandan ayırt edilmesi ve morfolojik olarak analiz edilmesidir:
+                The core of the system relies on isolating moving objects from static backgrounds and analyzing 
+                their morphological characteristics through the following pipeline:
             </p>
             <ul>
-                <li><strong>Gri Tonlama ve Eşikleme (Binarization):</strong> Renkli video kareleri önce gri tona, ardından 0-255 aralığından 0 (siyah) ve 1 (beyaz) değerlerine indirgenerek ikili (binary) görüntüye dönüştürülür.</li>
-                <li><strong>Arka Plan Çıkarma:</strong> Hareket etmeyen nesneler görüntüden temizlenerek sadece hareketli pikseller odak noktasına alınır.</li>
-                <li><strong>Blob Analysis:</strong> Beyaz piksellerin oluşturduğu gruplar (lekeler) analiz edilir. Bu grupların alanı ve boyutları önceden tanımlanan "araç boyutu" kriterlerine uyuyorsa, sistem bunu bir araç olarak tanımlar.</li>
-                <li><strong>Nesne Sayma:</strong> Tanımlanan araçlar belirlenen bir sanal çizgiyi geçtiğinde sayaç tetiklenir ve toplam araç sayısı güncellenir.</li>
+                <li><strong>Binarization & Grayscale Conversion:</strong> Initial color frames are 
+                converted to grayscale and subsequently transformed into binary (black and white) 
+                images. This reduction to 0s and 1s simplifies the data, allowing for high-speed 
+                processing of pixel groups.</li>
+                <li><strong>Background Subtraction:</strong> By calculating the difference between consecutive 
+                frames, static elements are removed. This ensures the system focuses exclusively on dynamic pixels 
+                representing movement.</li>
+                <li><strong>Blob Analysis & Filtering:</strong> The system analyzes clusters of white pixels, known 
+                as "blobs." These groups are evaluated based on predefined area and dimension criteria; if a blob 
+                matches the typical size of a vehicle, it is classified as a valid target.</li>
+                <li><strong>Virtual Trigger & Counting:</strong> A virtual detection line is established within 
+                the coordinate plane. When a tracked "blob" crosses this threshold, the counter is triggered, updating 
+                the total vehicle count instantly.</li>
             </ul>
 
-            <div class="project-images">
-                <img src="../../photos/matlab_project.jpg" alt="MATLAB Vehicle Detection Result">
+            <div class="matlab-project-row">
+                <div class="matlab-left">
+                    <img src="../../photos/vehicle.webp" alt="MATLAB Vehicle Detection Analysis">
+                </div>
+                <div class="matlab-right">
+                    <img src="../../photos/car.webp" alt="MATLAB Morphological Operations">
+                </div>
             </div>
 
-            <h2>Teknik Kazanımlar</h2>
-            <p>
-                Bu çalışma sayesinde dijital görüntü işleme (digital image processing), filtreleme teknikleri ve nesne takibi 
-                konularında derinlemesine bilgi sahibi oldum. MATLAB'ın <i>Computer Vision Toolbox</i> kütüphanesini etkin bir şekilde 
-                kullanarak karmaşık mühendislik problemlerine yazılımsal çözümler üretmeyi deneyimledim.
-            </p>
+            <h3>Engineering Competencies & Achievements</h3>
+            <ul>
+                <li><strong>Computer Vision Toolbox:</strong> Gained extensive experience in utilizing MATLAB's 
+                specialized libraries for filtering, morphological operations, and object tracking.</li>
+                <li><strong>Signal Processing:</strong> Mastered digital image processing techniques, including 
+                noise reduction and threshold optimization, to maintain accuracy under varying environmental 
+                conditions.</li>
+                <li><strong>Software Integration:</strong> Developed a modular software architecture that can be 
+                adapted for different camera angles and traffic densities, providing a scalable solution for 
+                traffic engineering.</li>
+                
+            </ul>
         </article>
     </main>
 
@@ -62,5 +93,31 @@
             </div>
         </div>
     </footer>
+    <script>
+        const toggle = document.getElementById('power-toggle');
+        const statusText = document.getElementById('switch-status');
+
+        // 1. HAFIZAYI KONTROL ET: Sayfa açıldığında daha önce basılmış mı bak
+        const systemState = localStorage.getItem('portfolio-power');
+
+        if (systemState === 'on') {
+            toggle.checked = true;
+            document.body.classList.add('system-on');
+            statusText.innerText = "PLUG OUT";
+        }
+
+        // 2. DÜĞMEYE BASILDIĞINDA: Hem sınıfı ekle hem hafızaya yaz
+        toggle.addEventListener('change', function() {
+            if (this.checked) {
+                document.body.classList.add('system-on');
+                statusText.innerText = "PLUG OUT";
+                localStorage.setItem('portfolio-power', 'on'); // Hafızaya al
+            } else {
+                document.body.classList.remove('system-on');
+                statusText.innerText = "PLUG IN";
+                localStorage.setItem('portfolio-power', 'off'); // Hafızaya al
+            }
+        });
+    </script>
 </body>
 </html>

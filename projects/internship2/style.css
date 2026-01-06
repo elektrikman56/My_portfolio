@@ -3,7 +3,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../../photos/arkaplan.jpg');
+    background-image: url('../../photos/arkaplan.jpg');
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -110,4 +110,165 @@ body {
 
 .social-links a:hover {
     color: white;
+}
+/* --- POWER SWITCH SİSTEMİ (PROJE SAYFALARI İÇİN) --- */
+
+/* 1. Sistem Perdesi (Overlay) Güncellemesi */
+/* Bu kısmı mevcut .overlay kodun varsa onunla değiştir veya en alta ekle */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 1; /* Başlangıçta karanlık */
+    z-index: -1; /* Arkaplanın önünde, yazıların arkasında */
+    transition: opacity 1.5s ease-in-out;
+    pointer-events: none;
+}
+
+/* Sistem açıkken perdenin durumu */
+body.system-on .overlay {
+    opacity: 0.3; 
+}
+
+/* 2. Düğme Konteynırı */
+.power-switch-container {
+    position: fixed;
+    top: 30px;
+    right: 50px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.switch-text {
+    font-size: 15px;
+    font-weight: bold;
+    color: #00d4ff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 120px;
+    height: 60px;
+}
+
+.switch input { opacity: 0; width: 0; height: 0; }
+
+/* 3. FOTOĞRAFLI SLIDER (Yollar ../../ ile düzeltildi) */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    transition: 0.4s ease-in-out;
+    /* İki klasör dışarı çıkıp photos'a girer */
+    background-image: url('../../photos/plugin.png'); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Tıklandığında resim değişimi */
+input:checked + .slider {
+    background-image: url('../../photos/plugout.png');
+    filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.6));
+}
+.project-sub-section {
+    background: transparent !important; /* Arka plan çakışmasını engeller */
+    width: 100%;
+    margin-top: 20px;
+}
+
+.project-main-content {
+    display: flex !important;
+    flex-direction: row;      /* Yan yana dizilimi garanti eder */
+    align-items: flex-start;  /* Üstten hizalar, kaymayı önler */
+    gap: 30px;                /* Metin ve resim arası net boşluk */
+}
+
+.project-description {
+    flex: 1;                  /* Kalan tüm alanı metne ayırır */
+}
+
+.project-description p {
+    margin-top: 0;            /* İlk paragrafın fotoyla aynı hizada başlamasını sağlar */
+    text-align: justify;      /* Metnin daha düzenli durmasını sağlar */
+}
+
+.project-images-vertical {
+    flex: 0 0 100px;         /* Fotoğraf genişliğini sabit tutar, metni sıkıştırmaz */
+}
+
+.project-images-vertical img {
+    width: 100% !important;
+    height: auto;             /* Orantılı büyüme sağlar */
+    border-radius: 15px;
+}
+
+/* Mobilde kaymayı önlemek için */
+@media (max-width: 850px) {
+    .project-main-content {
+        flex-direction: column;
+    }
+    .project-images-vertical {
+        width: 100%;
+        flex: 0 0 auto;
+    }
+}
+/* 3'lü Fotoğraf Grubu */
+.project-triple-row {
+    display: flex !important;
+    justify-content: space-between;
+    gap: 20px;
+    margin: 40px auto;
+    width: 100%;
+}
+
+.triple-item {
+    flex: 1; /* Üçüne de eşit genişlik verir */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.triple-item img {
+    width: 100% !important;
+    height: 220px;       /* Fotoğrafları aynı boyuta zorlar */
+    object-fit: cover;   /* Farklı oranlardaki fotoları yamultmadan sığdırır */
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    transition: transform 0.3s ease;
+}
+
+
+
+.triple-caption {
+    margin-top: 12px;
+    font-size: 0.9rem;
+    color: #00d4ff;
+    font-weight: 500;
+}
+
+/* Alt Özet Metni */
+.project-summary-text {
+    margin-top: 30px;
+    border-top: 1px solid rgba(0, 212, 255, 0.2);
+    padding-top: 20px;
+}
+
+/* Mobil Uyumluluk */
+@media (max-width: 768px) {
+    .project-triple-row {
+        flex-direction: column;
+    }
+    .triple-item img {
+        height: auto;
+    }
 }

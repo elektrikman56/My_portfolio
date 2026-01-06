@@ -18,53 +18,75 @@
                 <h1 class="header-name">BOARD DESIGN & LAB SKILLS</h1>
                 <p class="header-subtitle">PCB Design, Breadboard Prototyping & Lab Equipment</p>
             </div>
+            <div class="power-switch-container">
+                <label class="switch">
+                    <input type="checkbox" id="power-toggle"> 
+                    <span class="slider"></span>
+                </label>
+                <span class="switch-text" id="switch-status">PLUG IN</span>
+            </div>
         </div>
     </nav>
-
+    
     <main class="content-wrapper">
         <article class="project-details">
-            <h2>Elektronik Tasarım ve Prototipleme</h2>
+            <h2>Electronic Circuits & Systems Design Laboratory</h2>
             <p>
-                Üniversite eğitimim süresince, temelden ileri seviyeye kadar 15'ten fazla bireysel elektronik projesi hayata geçirdim. 
-                Tasarım süreçlerinde <strong>Proteus (ISIS & ARES)</strong> yazılımını kullanarak devre şemaları oluşturdum ve 
-                simülasyon aşamalarını yürüttüm.
+                Throughout an intensive academic semester, I successfully designed, simulated, and prototyped a series 
+                of over 10 specialized electronic projects. This laboratory series followed a rigorous engineering workflow: 
+                starting with Proteus simulations to validate circuit logic, followed by physical breadboarding and 
+                concluding with formal technical reporting. The series progressed from building essential laboratory 
+                tools to designing complex automated systems using analog and digital components.
             </p>
-            
+            <h3>Electronic Circuits & Systems Design Laboratory</h3>
             <p>
-                Projelerimin büyük bir kısmını, hızlı prototipleme imkanı sağlayan <strong>Breadboard</strong> üzerinde kurgulayarak, 
-                devre elemanlarının davranışlarını ve sinyal akışlarını canlı olarak gözlemledim. Bu süreç, teorik devre analizinin 
-                pratik uygulama ile nasıl birleştiğini anlamamı sağladı.
-            </p>
-
-            <div class="skills-grid">
-                <div class="skill-item">Proteus ISIS/ARES</div>
-                <div class="skill-item">Breadboard Prototyping</div>
-                <div class="skill-item">Circuit Simulation</div>
-                <div class="skill-item">PCB Design</div>
-            </div>
-
-            <h2>Laboratuvar Ekipmanları ve Ölçüm</h2>
-            <p>
-                Bu projeler esnasında profesyonel bir elektronik laboratuvarının vazgeçilmez ekipmanlarını kullanma konusunda 
-                uzmanlık kazandım:
+                The semester began with the construction of my own laboratory equipment, which served as the power and 
+                signal base for subsequent experiments:
             </p>
             <ul>
-                <li><strong>Osiloskop:</strong> Sinyal analizi, genlik ve frekans ölçümleri.</li>
-                <li><strong>DC Power Supply:</strong> Devre besleme ve akım sınırlama teknikleri.</li>
-                <li><strong>Fonksiyon Jeneratörü:</strong> Kare, sinüs ve üçgen dalga üretimi ile devre testi.</li>
-                <li><strong>Multimetre:</strong> Hassas voltaj, akım ve direnç ölçümleri.</li>
+                <li><strong>Multi-Output Power Supply:</strong> Designed and assembled a regulated power supply capable of 
+                providing stable 5V, 9V, 12V, and 15V DC outputs.</li>
+                <li><strong>Self-Made Signal Generator:</strong> Constructed a custom signal generator to produce various 
+                waveforms, used for testing and calibrating other designed circuits throughout the term.</li>
             </ul>
 
-            <div class="project-images">
-                <img src="../../photos/board_design.jpg" alt="Electronic Lab and Board Design">
+            <h3>Power Supply and H-bridge Motor Driver:</h3>
+            <div class="projects-images-row">
+                <div class="project-image-item power-supply">
+                    <img src="../../photos/power_supply.jpg" alt="Power Supply Unit Design">
+                </div>
+
+                <div class="project-image-item motor-drive">
+                    <img src="../../photos/motor-drive.png" alt="Motor Drive Circuit Design">
+                </div>
+            </div>
+            <h3>Electronics Design Lab</h3>
+            <p>
+                The laboratory work covered a wide range of electronic principles and component integrations:
+            </p>
+            <ul>
+                <li><strong>Automated Fire Alarm System:</strong> Developed a temperature-sensitive alarm using a 555 Timer 
+                IC and PTC/NTC thermistors. The circuit was engineered to trigger an audible alert based on specific thermal 
+                thresholds.</li>
+                <li><strong>Operational Amplifier (Op-Amp) Applications:</strong> Implemented various Op-Amp configurations, 
+                including comparators, integrators, and differentiators, to process analog signals and manage sensor data.</li>
+                <li><strong>Light-Sensitive Tracking (Final Project):</strong> The series culminated in an LDR-based solar 
+                tracking system (detailed in a separate section), which combined bridge circuits and differential 
+                sensing to achieve autonomous motion.</li>
+            </ul>
+
+            <div class="skills-grid">
+                <div class="skill-item">Proteus Simulation</div>
+                <div class="skill-item">Analog Circuit Design</div>
+                <div class="skill-item">Rapid Prototyping</div>
+                <div class="skill-item">Hardware Debugging</div>
             </div>
 
-            <h2>Bireysel Çalışmalar</h2>
-            <p>
-                Güç kaynakları, amplifikatör devreleri, sensör okuma kartları ve mantık devreleri gibi geniş bir yelpazede 
-                çalışmalar yaptım. Her bir proje, sorun giderme (troubleshooting) ve hassas lehimleme gibi teknik becerilerimi 
-                bir adım ileri taşıdı.
-            </p>
+            
+
+            
+
+            
         </article>
     </main>
 
@@ -76,5 +98,31 @@
             </div>
         </div>
     </footer>
+    <script>
+        const toggle = document.getElementById('power-toggle');
+        const statusText = document.getElementById('switch-status');
+
+        // 1. HAFIZAYI KONTROL ET: Sayfa açıldığında daha önce basılmış mı bak
+        const systemState = localStorage.getItem('portfolio-power');
+
+        if (systemState === 'on') {
+            toggle.checked = true;
+            document.body.classList.add('system-on');
+            statusText.innerText = "PLUG OUT";
+        }
+
+        // 2. DÜĞMEYE BASILDIĞINDA: Hem sınıfı ekle hem hafızaya yaz
+        toggle.addEventListener('change', function() {
+            if (this.checked) {
+                document.body.classList.add('system-on');
+                statusText.innerText = "PLUG OUT";
+                localStorage.setItem('portfolio-power', 'on'); // Hafızaya al
+            } else {
+                document.body.classList.remove('system-on');
+                statusText.innerText = "PLUG IN";
+                localStorage.setItem('portfolio-power', 'off'); // Hafızaya al
+            }
+        });
+    </script>
 </body>
 </html>

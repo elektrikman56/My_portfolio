@@ -4,7 +4,7 @@ body {
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     /* Resim yolu: İki klasör dışarı çık (../../) ve photos klasörüne gir */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../../photos/arkaplan.jpg');
+    background-image: url('../../photos/arkaplan.jpg');
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -85,7 +85,7 @@ body {
 }
 
 .project-images img {
-    width: 100%;
+    width: 30%;
     border-radius: 15px;
     margin: 30px 0;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
@@ -103,3 +103,135 @@ body {
     text-decoration: none;
     margin: 0 15px;
 }
+/* --- POWER SWITCH SİSTEMİ (PROJE SAYFALARI İÇİN) --- */
+
+/* 1. Sistem Perdesi (Overlay) Güncellemesi */
+/* Bu kısmı mevcut .overlay kodun varsa onunla değiştir veya en alta ekle */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 1; /* Başlangıçta karanlık */
+    z-index: -1; /* Arkaplanın önünde, yazıların arkasında */
+    transition: opacity 1.5s ease-in-out;
+    pointer-events: none;
+}
+
+/* Sistem açıkken perdenin durumu */
+body.system-on .overlay {
+    opacity: 0.3; 
+}
+
+/* 2. Düğme Konteynırı */
+.power-switch-container {
+    position: fixed;
+    top: 30px;
+    right: 50px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.switch-text {
+    font-size: 15px;
+    font-weight: bold;
+    color: #00d4ff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 120px;
+    height: 60px;
+}
+
+.switch input { opacity: 0; width: 0; height: 0; }
+
+/* 3. FOTOĞRAFLI SLIDER (Yollar ../../ ile düzeltildi) */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    transition: 0.4s ease-in-out;
+    /* İki klasör dışarı çıkıp photos'a girer */
+    background-image: url('../../photos/plugin.png'); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Tıklandığında resim değişimi */
+input:checked + .slider {
+    background-image: url('../../photos/plugout.png');
+    filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.6));
+}
+.project-main-content {
+    display: flex !important; /* Yan yana getirmeyi zorla */
+    flex-direction: row;      /* Satır dizilimi */
+    align-items: flex-start;  /* Üstten hizala */
+    gap: 30px;               /* Aradaki boşluk */
+    margin: 30px 0;
+}
+
+.project-images-vertical {
+    flex: 0 0 300px;         /* Fotoğraf genişliği 300px sabit */
+}
+
+.project-images-vertical img {
+    width: 100% !important;  /* Genişlik kutusuna (300px) sadık kalır */
+    height: 235px;           /* Buradaki rakamı dilediğin dikey uzunluğa göre ayarla */
+    object-fit: cover;       /* KRİTİK: Fotoğrafın oranını bozmadan kutuyu doldurur, görüntüyü sünnetmez */
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.project-description {
+    flex: 1;                 /* Metin kalan alanı doldursun */
+    margin-top: -30px;
+}
+
+/* Mobilde alt alta gelmesi için */
+@media (max-width: 768px) {
+    .project-main-content {
+        flex-direction: column;
+    }
+    .project-images-vertical {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+}
+
+/* LIDAR Görsellerini Yan Yana Getiren Kapsayıcı */
+.project-LIDAR {
+    display: flex;
+    justify-content: space-between; /* İki resim arasına eşit boşluk bırakır */
+    gap: 120px;                     /* Resimler arasındaki net boşluk */
+    margin: 30px auto;
+    width: 80%;
+}
+
+/* Her bir görsel kutusu */
+.lidar-item {
+    flex: 1;                       /* İkisinin de eşit genişlikte olmasını sağlar */
+    display: flex;
+    flex-direction: column;        /* Resim ve yazıyı alt alta dizer */
+    align-items: center;
+}
+
+.lidar-item img {
+    width: 100%;                   /* Kutunun genişliğini doldurur */
+    height: 250px;                 /* Sabit yükseklik vererek hizayı koruruz */
+    object-fit: cover;             /* Resimler farklı oranlardaysa bozulmayı önler */
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+    transition: transform 0.3s ease;
+}
+
+

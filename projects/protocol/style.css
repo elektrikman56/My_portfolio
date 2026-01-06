@@ -3,7 +3,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('../../photos/arkaplan.jpg');
+    background-image: url('../../photos/arkaplan.jpg');
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -71,3 +71,119 @@ body {
 /* Footer */
 .footer { background: rgba(0, 0, 0, 0.95); padding: 30px 0; text-align: center; margin-top: auto; }
 .social-links a { color: #00d4ff; text-decoration: none; margin: 0 15px; font-weight: 600; }
+/* --- POWER SWITCH SİSTEMİ (PROJE SAYFALARI İÇİN) --- */
+
+/* 1. Sistem Perdesi (Overlay) Güncellemesi */
+/* Bu kısmı mevcut .overlay kodun varsa onunla değiştir veya en alta ekle */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 1; /* Başlangıçta karanlık */
+    z-index: -1; /* Arkaplanın önünde, yazıların arkasında */
+    transition: opacity 1.5s ease-in-out;
+    pointer-events: none;
+}
+
+/* Sistem açıkken perdenin durumu */
+body.system-on .overlay {
+    opacity: 0.3; 
+}
+
+/* 2. Düğme Konteynırı */
+.power-switch-container {
+    position: fixed;
+    top: 30px;
+    right: 50px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.switch-text {
+    font-size: 15px;
+    font-weight: bold;
+    color: #00d4ff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 120px;
+    height: 60px;
+}
+
+.switch input { opacity: 0; width: 0; height: 0; }
+
+/* 3. FOTOĞRAFLI SLIDER (Yollar ../../ ile düzeltildi) */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    transition: 0.4s ease-in-out;
+    /* İki klasör dışarı çıkıp photos'a girer */
+    background-image: url('../../photos/plugin.png'); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Tıklandığında resim değişimi */
+input:checked + .slider {
+    background-image: url('../../photos/plugout.png');
+    filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.6));
+}
+/* Ana Kapsayıcı */
+.project-sender-receiver {
+    display: flex !important;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 25px;
+    margin: 30px 0;
+    width: 100%;
+}
+
+/* --- SOLDAKİ FOTOĞRAF (SENDER) --- */
+.terminal-sender {
+    flex: 1; /* Alanın yarısını kaplaması için */
+    /* Buraya sadece sender için özel ayarlar ekleyebilirsin */
+}
+
+.terminal-sender img {
+    width: 100% !important;
+    height: 213px;
+    border-radius: 12px;
+    border: 2px solid #00d4ff; /* Örn: Sender çerçevesi mavi olsun */
+    box-shadow: 0 5px 20px rgba(0, 212, 255, 0.3);
+}
+
+/* --- SAĞDAKİ FOTOĞRAF (RECEIVER) --- */
+.terminal-receiver {
+    flex: 1;
+    /* Buraya sadece receiver için özel ayarlar ekleyebilirsin */
+}
+
+.terminal-receiver img {
+    width: 100% !important;
+    height: auto;
+    border-radius: 12px;
+    border: 2px solid #ff4b2b; /* Örn: Receiver çerçevesi kırmızı/turuncu olsun */
+    box-shadow: 0 5px 20px rgba(255, 75, 43, 0.3);
+}
+
+/* Mobil Uyumluluk */
+@media (max-width: 800px) {
+    .project-sender-receiver {
+        flex-direction: column;
+    }
+    .terminal-sender, .terminal-receiver {
+        width: 100%;
+    }
+}

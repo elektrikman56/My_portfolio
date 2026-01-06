@@ -18,33 +18,61 @@
                 <h1 class="header-name">INTERNSHIP 1</h1>
                 <p class="header-subtitle">Cloud and Digitalization</p>
             </div>
+            <div class="power-switch-container">
+                <label class="switch">
+                    <input type="checkbox" id="power-toggle"> 
+                    <span class="slider"></span>
+                </label>
+                <span class="switch-text" id="switch-status">PLUG IN</span>
+            </div>
         </div>
     </nav>
 
     <main class="content-wrapper">
         <article class="project-details">
-            <h2>Staj Deneyimi</h2>
+            <h2>IT Systems & Network Engineering Internship</h2>
             <p>
-                Bu staj döneminde, modern bulut bilişim teknolojileri ve endüstriyel dijitalleşme 
-                süreçleri üzerine odaklandım. Şirket bünyesindeki verilerin bulut ortamına 
-                aktarılması ve iş akışlarının dijital platformlara taşınması konusunda aktif rol aldım.
+                During my internship, I took on significant responsibilities in 
+                managing and securing corporate IT infrastructures. My work focused on creating scalable 
+                network solutions and ensuring the high availability of server resources through advanced 
+                configuration and troubleshooting. This experience provided me with a deep technical 
+                understanding of how hardware and software integrate to support large-scale business 
+                operations.
             </p>
             
-            <p>
-                Çalışma süresince bulut mimarileri, veri güvenliği ve sistem entegrasyonu gibi 
-                konularda teknik yetkinlik kazandım. Ayrıca, dijital dönüşümün operasyonel verimlilik 
-                üzerindeki etkilerini gözlemleme ve analiz etme fırsatı buldum.
-            </p>
+            <h3>Core Technical Competencies & Projects</h3>
+            <ul>
+                <li><strong>Network Infrastructure & Management:</strong> I specialized in the configuration of MikroTik 
+                and Ruijie networking hardware, where I implemented VLANs and managed Access Points to 
+                ensure seamless connectivity across the facility.</li>
+                <li><strong>Server Administration & Virtualization:</strong> I gained hands-on experience in setting up 
+                and managing virtual environments using VMware ESXi, including the deployment of virtual 
+                machines and the management of Active Directory for user authentication and permissions.</li>
+                <li><strong>Security & Firewall Configuration:</strong> I actively participated in defining firewall rules 
+                and security protocols to protect the internal network from external threats and unauthorized 
+                access.</li>
+                <li><strong>Database & Web Services:</strong> My role included the installation and maintenance of SQL databases, 
+                along with the deployment of web applications using IIS (Internet Information Services).</li>
+                <li><strong>Hardware Diagnostics & Maintenance:</strong> I performed advanced troubleshooting on server and 
+                workstation hardware, including component upgrades, BIOS configurations, and diagnosing 
+                motherboard-level failures.</li> 
+            </ul>
 
-            <div class="project-images">
-                <img src="../../photos/intern1.webp" alt="Internship 1 Experience">
+
+            <div class="project-triple-row">
+                <div class="triple-item">
+                    <img src="../../photos/access.webp" alt="Experience 1">
+                </div>
+                <div class="triple-item">
+                    <img src="../../photos/datacenter.webp" alt="Experience 2"> </div>
+                <div class="triple-item">
+                    <img src="../../photos/vmware.webp" alt="Experience 3"> </div>
             </div>
 
-            <h2>Kazanımlar ve Teknolojiler</h2>
             <p>
-                Bulut altyapı yönetimi ve kurumsal dijitalleşme stratejileri hakkında edindiğim 
-                bilgiler, mühendislik bakış açıma vizyon kattı. Bu süreçte kullanılan araçlar ve 
-                yöntemler hakkında detayları buraya ekleyebilirsin.
+                This internship allowed me to master professional tools and methodologies, from network 
+                mapping to complex system recovery. Working in a fast-paced IT environment sharpened my ability 
+                to diagnose system bottlenecks and implement long-term technical solutions.
             </p>
         </article>
     </main>
@@ -57,5 +85,31 @@
             </div>
         </div>
     </footer>
+    <script>
+        const toggle = document.getElementById('power-toggle');
+        const statusText = document.getElementById('switch-status');
+
+        // 1. HAFIZAYI KONTROL ET: Sayfa açıldığında daha önce basılmış mı bak
+        const systemState = localStorage.getItem('portfolio-power');
+
+        if (systemState === 'on') {
+            toggle.checked = true;
+            document.body.classList.add('system-on');
+            statusText.innerText = "PLUG OUT";
+        }
+
+        // 2. DÜĞMEYE BASILDIĞINDA: Hem sınıfı ekle hem hafızaya yaz
+        toggle.addEventListener('change', function() {
+            if (this.checked) {
+                document.body.classList.add('system-on');
+                statusText.innerText = "PLUG OUT";
+                localStorage.setItem('portfolio-power', 'on'); // Hafızaya al
+            } else {
+                document.body.classList.remove('system-on');
+                statusText.innerText = "PLUG IN";
+                localStorage.setItem('portfolio-power', 'off'); // Hafızaya al
+            }
+        });
+    </script>
 </body>
 </html>

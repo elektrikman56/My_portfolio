@@ -18,51 +18,90 @@
                 <h1 class="header-name">SYSTEM MODELING & OPTIMIZATION</h1>
                 <p class="header-subtitle">Data Mining, Linear Regression & Control Theory Research</p>
             </div>
+            <div class="power-switch-container">
+                <label class="switch">
+                    <input type="checkbox" id="power-toggle"> 
+                    <span class="slider"></span>
+                </label>
+                <span class="switch-text" id="switch-status">PLUG IN</span>
+            </div>
         </div>
     </nav>
 
     <main class="content-wrapper">
         <article class="project-details">
-            <h2>Araştırma Özeti</h2>
+            <div class="project-header-row">
+                <h2>Modeling Criminal Systems</h2>
+                
+                <div class="pdf-link-container">
+                    <a href="../../documents/Hamit_Budak_Begüm_Övüç.pdf" target="_blank" class="pdf-button">
+                        <span class="pdf-icon">📄</span>
+                        View Full Article
+                    </a>
+                </div>
+            </div>
             <p>
-                Bu çalışma, hırsızlık vakalarını matematiksel bir sistem olarak ele alan ve bu sistemin çıktılarını optimize etmeyi hedefleyen akademik tabanlı bir projedir. Yaklaşık 20 farklı veri kaynağından (yaş, tecrübe, lokasyon, ev sahibi profili vb.) elde edilen veriler üzerinde <strong>Data Mining (Veri Madenciliği)</strong> teknikleri uygulanarak kapsamlı bir veri seti oluşturulmuştur.
+                This interdisciplinary research treats the process of burglary as a dynamic, controllable 
+                system rather than a random event. By applying Data Mining techniques, a comprehensive dataset 
+                was constructed from over 100 real-world-based experimental samples, incorporating more than 20 
+                distinct variables. The project demonstrates the power of Linear Regression and Control Theory 
+                in quantifying human behavior and optimizing complex systems.            
             </p>
             
-            <h2>Matematiksel Modelleme ve Lineer Regresyon</h2>
+            <h3>The Dataset: 100+ Samples & Multidimensional Variables</h3>
             <p>
-                Elde edilen veriler <strong>MATLAB</strong> ortamında <strong>Lineer Regresyon</strong> yöntemiyle analiz edilmiştir. Geliştirilen model, sisteme girilen parametreler doğrultusunda şu iki kritik çıktıyı yüksek doğrulukla tahmin etmektedir:
+                The strength of this model lies in its diverse data sources. To achieve high predictive accuracy, 
+                the following parameters were meticulously analyzed for each of the 100+ cases:
             </p>
             <ul>
-                <li><strong>Maddi Kayıp Tahmini:</strong> Hırsızın evden ne kadarlık (TL bazında) malzeme çalabileceği.</li>
-                <li><strong>Süre Tahmini:</strong> Tüm hırsızlık eyleminin kaç dakikada tamamlanabileceği.</li>
+                <li><strong>Offender Profile:</strong> Age, years of experience, and whether they acted according 
+                to a pre-defined plan.</li>
+                <li><strong>Property Characteristics:</strong> House type (detached, apartment), presence of 
+                security systems (alarms, cameras), and the type of locks used.</li>
+                <li><strong>Environmental Factors:</strong> Location of the property, presence of witnesses, 
+                and the specific time of the incident.</li>
+                <li><strong>Victim Profile:</strong> Income level and homeowner habits.</li>
+            </ul>
+            <h3>
+                Small part of the samples:
+            </h3>
+            
+            <div class="photos-burglary_datas">
+                 <img src="../../photos/burglary_datas.png" alt="MATLAB Vehicle Detection Analysis">
+             </div>
+                
+
+
+            <h3>Mathematical Modeling & Compensator Design</h3>
+            <p>
+                Using MATLAB, the data was processed through supervised learning models to predict two 
+                primary outputs: Financial Loss (USD) and Operation Duration (Minutes). To further "perfect" 
+                the efficiency of this system, I designed classical control compensators:
+            </p>
+            <ul>
+                <li><strong>Linear Regression:</strong> Used to establish the baseline relationship between 
+                input variables (like experience and planning) and the resulting outputs.</li>
+                <li><strong>Lead Compensator:</strong> Designed to increase the system's response speed, 
+                analyzing how time efficiency is optimized within the criminal process.</li>
+                <li><strong>Lag Compensator:</strong> Implemented to reduce steady-state error, ensuring the 
+                predicted results align with the actual outcomes with a damping ratio of ζ = 0.7 and a 
+                settling time of <i>𝓣</i><sub>s</sub> = 660 ms.</li>
+                <li><strong>Root Locus Analysis:</strong> Conducted using the sisotool to ensure the stability 
+                of the transfer function <i>𝐆(s)</i> under varying gain (𝒦) conditions.</li>
             </ul>
 
+            <h3>Example of One Burglar After Lead and Lag Compansator:</h3>
+            <div class="photos-burglary_matlab">
+                 <img src="../../photos/burglary_matlab.webp" alt="MATLAB Vehicle Detection Analysis">
+             </div>
+            <h3>Engineering Impact</h3>
+            <p>
+                This study provides a novel perspective by merging Criminology with Electrical Engineering. 
+                It proves that even non-linear social events can be modeled, predicted, and optimized using 
+                transfer functions and feedback loops. This project has provided me with deep expertise in 
+                statistical data analysis, system dynamics, and MATLAB-based control system design.
+            </p>
             
-
-[Image of linear regression graph showing data points and line of best fit]
-
-
-            <h2>Sistem Optimizasyonu: Lag & Lead Controllers</h2>
-            <p>
-                Projenin en özgün kısmı, bu hırsızlık senaryosunu dinamik bir sistem olarak modelleyip üzerine <strong>Lag (Gecikmeli)</strong> ve <strong>Lead (Öncü)</strong> kontrolcüler tasarlamaktır. 
-            </p>
-            <blockquote>
-                <strong>Not:</strong> Bu kontrolcüler, hırsızlığı teşvik etmek değil; bir eylemin "kusursuz bir sistem" olarak ele alındığında matematiksel olarak nasıl mükemmelleştirilebileceğini analiz etmek amacıyla tasarlanmıştır.
-            </div>
-            <p>
-                Lead Controller ile sistemin tepki hızı artırılarak zaman optimizasyonu sağlanmış, Lag Controller ile sistemin kararlı hal hatası minimize edilerek tahmin edilen çıktılara en yakın sonuçların alınması hedeflenmiştir.
-            </p>
-
-            
-
-            <div class="project-images">
-                <img src="../../photos/security_project.jpg" alt="MATLAB Control System Design and Regression Results">
-            </div>
-
-            <h2>Akademik Katkı</h2>
-            <p>
-                Yayınlanmamış bir makale çalışması olan bu proje; veri analitiği ile klasik kontrol teorisinin alışılagelmişin dışında bir senaryoda birleştirilmesinin bir kanıtıdır. Sistem dinamiği, kök-yer eğrisi (root locus) analizi ve regresyon modelleri üzerine derinlemesine tecrübe kazandırmıştır.
-            </p>
         </article>
     </main>
 
@@ -74,5 +113,31 @@
             </div>
         </div>
     </footer>
+    <script>
+        const toggle = document.getElementById('power-toggle');
+        const statusText = document.getElementById('switch-status');
+
+        // 1. HAFIZAYI KONTROL ET: Sayfa açıldığında daha önce basılmış mı bak
+        const systemState = localStorage.getItem('portfolio-power');
+
+        if (systemState === 'on') {
+            toggle.checked = true;
+            document.body.classList.add('system-on');
+            statusText.innerText = "PLUG OUT";
+        }
+
+        // 2. DÜĞMEYE BASILDIĞINDA: Hem sınıfı ekle hem hafızaya yaz
+        toggle.addEventListener('change', function() {
+            if (this.checked) {
+                document.body.classList.add('system-on');
+                statusText.innerText = "PLUG OUT";
+                localStorage.setItem('portfolio-power', 'on'); // Hafızaya al
+            } else {
+                document.body.classList.remove('system-on');
+                statusText.innerText = "PLUG IN";
+                localStorage.setItem('portfolio-power', 'off'); // Hafızaya al
+            }
+        });
+    </script>
 </body>
 </html>

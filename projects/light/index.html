@@ -18,46 +18,59 @@
                 <h1 class="header-name">LIGHT TRACKING MOTOR</h1>
                 <p class="header-subtitle">Term Project: Sun-Tracking System Prototype</p>
             </div>
+            <div class="power-switch-container">
+                <label class="switch">
+                    <input type="checkbox" id="power-toggle"> 
+                    <span class="slider"></span>
+                </label>
+                <span class="switch-text" id="switch-status">PLUG IN</span>
+            </div>
         </div>
     </nav>
 
     <main class="content-wrapper">
         <article class="project-details">
-            <h2>Proje Amacı ve Çalışma Mantığı</h2>
-            <p>
-                Bu proje, ışık yoğunluğunu takip ederek motorun yönünü en dik açıyla ışık kaynağına yönlendiren bir sistemdir. 
-                Güneş panellerinin verimliliğini artırmak amacıyla kullanılan <strong>Solar Tracking</strong> sistemlerinin temel çalışma 
-                prensibini modellemektedir.
-            </p>
-            
-            <p>
-                Sistem, ışık farkını algılamak için <strong>LDR (Light Dependent Resistor)</strong> sensör çiftlerini kullanır. 
-                Sensörlerden gelen analog veriler işlenerek, ışık kaynağının yönüne göre servo veya DC motorun kontrol edilmesi sağlanır.
-            </p>
+            <h2>LDR-Based Solar Tracking System</h2>
+            <div class="project-light-tracker">
+                <div class="tracker-image">
+                    <img src="../../photos/solar_light.jpg" alt="Light Tracking System Implementation">
+                </div>
 
-            [Image of a sun tracking circuit diagram with LDR and motors]
-
-            <h2>PCB Tasarımı ve Donanım</h2>
-            <p>
-                Bu projenin en önemli aşaması, tasarımın breadboard aşamasından kalıcı bir <strong>PCB (Baskı Devre Kartı)</strong> 
-                üzerine taşınmasıdır. Tasarım sürecinde şu adımlar izlenmiştir:
-            </p>
-            <ul>
-                <li><strong>Şematik Çizim:</strong> Proteus ISIS üzerinde devre şemasının tasarlanması.</li>
-                <li><strong>PCB Layout:</strong> Proteus ARES ile bileşenlerin yerleşimi ve yol çizimlerinin (routing) yapılması.</li>
-                <li><strong>Montaj:</strong> Bileşenlerin PCB üzerine hassas bir şekilde lehimlenerek testlerin yapılması.</li>
-            </ul>
-
-            <div class="project-images">
-                <img src="../../photos/light_project.jpg" alt="Light Tracking Motor PCB Design">
+                <div class="tracker-description">    
+                    <p>
+                        This project follows the core logic illustrated in the accompanying image to achieve 
+                        automated orientation. It involves the design and implementation of a light-tracking 
+                        system that automatically aligns a DC motor with the strongest light source. By utilizing 
+                        Light Dependent Resistors (LDRs) as sensors, the system creates a feedback loop that 
+                        determines the direction of movement based on differential light intensity. The core of 
+                        the project focuses on hardware-level direction control without the need for complex 
+                        microcontrollers in its most basic form.
+                    </p>
+                </div>
             </div>
 
-            <h2>Teknik Özellikler</h2>
+
+            <h3>Working Principle & Circuit Architecture</h3>
             <p>
-                Sistemde hassas yönelimi sağlamak amacıyla karşılaştırıcı (comparator) devreler veya mikrodenetleyici tabanlı 
-                algoritmalar kullanılmıştır. Bu çalışma, sadece bir "ışık takipçisi" değil, aynı zamanda verimli enerji 
-                sistemlerine giriş niteliğinde bir mühendislik çözümüdür.
+            The system operates by comparing the resistance values of two LDRs placed on opposite sides of the 
+            tracker. The balanced state is achieved when both sensors receive equal light. When an imbalance occurs, 
+            the following process is triggered:            
             </p>
+
+            <ul>
+                <li><strong>Dual-Sensor Comparison:</strong> LDRs act as variable resistors in a voltage divider 
+                circuit, where light intensity is converted into a voltage signal.</li>
+                <li><strong>Diode-Based H-Bridge Implementation:</strong> To control the DC motor's direction 
+                (clockwise and counter-clockwise), a custom H-Bridge circuit was designed. By using a specific 
+                arrangement of diodes and transistors (or switches), the circuit reverses the polarity of the voltage 
+                applied to the motor based on which LDR is triggered.</li>
+                <li><strong>Bidirectional Control:</strong> This bridge configuration allows the motor to rotate 
+                towards the light source until the LDRs reach an equilibrium, effectively "tracking" the light in 
+                real-time.</li>
+            </ul>
+            
+
+            
         </article>
     </main>
 
@@ -69,5 +82,31 @@
             </div>
         </div>
     </footer>
+    <script>
+        const toggle = document.getElementById('power-toggle');
+        const statusText = document.getElementById('switch-status');
+
+        // 1. HAFIZAYI KONTROL ET: Sayfa açıldığında daha önce basılmış mı bak
+        const systemState = localStorage.getItem('portfolio-power');
+
+        if (systemState === 'on') {
+            toggle.checked = true;
+            document.body.classList.add('system-on');
+            statusText.innerText = "PLUG OUT";
+        }
+
+        // 2. DÜĞMEYE BASILDIĞINDA: Hem sınıfı ekle hem hafızaya yaz
+        toggle.addEventListener('change', function() {
+            if (this.checked) {
+                document.body.classList.add('system-on');
+                statusText.innerText = "PLUG OUT";
+                localStorage.setItem('portfolio-power', 'on'); // Hafızaya al
+            } else {
+                document.body.classList.remove('system-on');
+                statusText.innerText = "PLUG IN";
+                localStorage.setItem('portfolio-power', 'off'); // Hafızaya al
+            }
+        });
+    </script>
 </body>
 </html>

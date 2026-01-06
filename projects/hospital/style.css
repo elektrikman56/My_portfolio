@@ -3,7 +3,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../../photos/arkaplan.jpg');
+    background-image: url('../../photos/arkaplan.jpg');
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -93,7 +93,27 @@ body {
     margin: 40px 0;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
+.project-details ul {
+    list-style: none; /* Varsayılan noktayı tamamen kaldırır */
+    padding: 0;
+    margin: 25px 0;
+}
 
+.project-details li {
+    position: relative; /* İçerideki absolute simgenin buraya hizalanmasını sağlar */
+    padding-left: 35px; /* Simgeye yer açmak için metni sağa iter */
+    margin-bottom: 15px;
+    list-style-type: none; /* Bazı tarayıcılar için ek güvenlik */
+}
+
+/* Marker kullanmıyoruz, doğrudan before ile simgeyi ekliyoruz */
+.project-details li::before {
+    content: "🌐";
+    position: absolute;
+    left: 0;           /* Artık sayfanın değil, li'nin en solundadır */
+    top: 0;            /* Metnin tepesiyle hizalar */
+    font-size: 1.2rem;
+}
 /* Footer */
 .footer {
     background: rgba(0, 0, 0, 0.9);
@@ -112,3 +132,146 @@ body {
 .social-links a:hover {
     color: white;
 }
+/* --- POWER SWITCH SİSTEMİ (PROJE SAYFALARI İÇİN) --- */
+
+/* 1. Sistem Perdesi (Overlay) Güncellemesi */
+/* Bu kısmı mevcut .overlay kodun varsa onunla değiştir veya en alta ekle */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 1; /* Başlangıçta karanlık */
+    z-index: -1; /* Arkaplanın önünde, yazıların arkasında */
+    transition: opacity 1.5s ease-in-out;
+    pointer-events: none;
+}
+
+/* Sistem açıkken perdenin durumu */
+body.system-on .overlay {
+    opacity: 0.3; 
+}
+
+/* 2. Düğme Konteynırı */
+.power-switch-container {
+    position: fixed;
+    top: 30px;
+    right: 50px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.switch-text {
+    font-size: 15px;
+    font-weight: bold;
+    color: #00d4ff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 120px;
+    height: 60px;
+}
+
+.switch input { opacity: 0; width: 0; height: 0; }
+
+/* 3. FOTOĞRAFLI SLIDER (Yollar ../../ ile düzeltildi) */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    transition: 0.4s ease-in-out;
+    /* İki klasör dışarı çıkıp photos'a girer */
+    background-image: url('../../photos/plugin.png'); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Tıklandığında resim değişimi */
+input:checked + .slider {
+    background-image: url('../../photos/plugout.png');
+    filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.6));
+}
+/* Ana Kapsayıcı */
+.hospital-project-row {
+    display: flex !important;
+    /* align-items: flex-start; yerine bunu kullanarak üst çizgiyi sabitleriz */
+    align-items: flex-start; 
+    gap: 40px;
+    margin: 40px 0;
+    width: 100%;
+}
+
+.hospital-description p {
+    /* Tarayıcılar paragraflara otomatik üst boşluk verir. 
+       Bunu sıfırlayarak metni en tepeye, fotoğrafla aynı hizaya çekeriz. */
+    margin-top: 0; 
+    line-height: 1.8;
+}
+
+.hospital-image {
+    flex: 0 0 400px;
+    /* Eğer fotoğraf hala yukarıda kalıyorsa, küçük bir padding verilebilir 
+       ama margin-top: 0 genellikle metni yukarı taşımak için yeterlidir. */
+}
+
+.hospital-image img {
+    width: 100% !important;
+    height: auto; /* Orantılı koruma */
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+/* Mobil Cihazlar İçin (Ekran daralınca alt alta geçer) */
+@media (max-width: 900px) {
+    .hospital-project-row {
+        flex-direction: column;
+    }
+    .hospital-image {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+}
+.project-images {
+    /* Genişliği koruyoruz */
+    width: 600px;
+    
+    /* YATAYDA ORTALAMA: Container'ın kendisini sayfada ortalar */
+    margin: 40px auto; 
+    
+    /* İÇERİK HİZALAMA: İçindeki resmi ortalar */
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
+
+.project-images img {
+    width: 100%;
+    height: auto;
+    
+    /* ÜST-ALT BOŞLUK DENGESİ: 
+       Resmin altındaki metnin çok uzakta durmaması için 
+       resmin alt margin değerini sıfırlıyoruz veya azaltıyoruz. */
+    margin-top: 0;
+    margin-bottom: 0; 
+
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+}
+
+/* Resimden sonra gelen metinle mesafeyi sabitlemek için */
+.project-images + p, 
+.project-images + ul {
+    margin-top: 10px; /* Görsel ile altındaki ilk öğe arası mesafe */
+}
+

@@ -133,22 +133,27 @@
         const toggle = document.getElementById('power-toggle');
         const statusText = document.getElementById('switch-status');
 
-        // Sayfa yüklendiğinde düğmenin durumuna göre sistemi ayarla
-        function updateSystemStatus() {
-            if (toggle.checked) {
+        // 1. HAFIZAYI KONTROL ET: Sayfa açıldığında daha önce basılmış mı bak
+        const systemState = localStorage.getItem('portfolio-power');
+
+        if (systemState === 'on') {
+            toggle.checked = true;
+            document.body.classList.add('system-on');
+            statusText.innerText = "PLUG OUT";
+        }
+
+        // 2. DÜĞMEYE BASILDIĞINDA: Hem sınıfı ekle hem hafızaya yaz
+        toggle.addEventListener('change', function() {
+            if (this.checked) {
                 document.body.classList.add('system-on');
                 statusText.innerText = "PLUG OUT";
+                localStorage.setItem('portfolio-power', 'on'); // Hafızaya al
             } else {
                 document.body.classList.remove('system-on');
                 statusText.innerText = "PLUG IN";
+                localStorage.setItem('portfolio-power', 'off'); // Hafızaya al
             }
-        }
-
-        // Düğme her değiştiğinde çalışır
-        toggle.addEventListener('change', updateSystemStatus);
-
-        // Sayfa ilk açıldığında kontrol et (Önbellekten gelen 'checked' durumunu yakalar)
-        updateSystemStatus();
+        });
     </script>
 </body>
 </html>

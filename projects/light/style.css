@@ -3,7 +3,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../../photos/arkaplan.jpg');
+    background-image: url('../../photos/arkaplan.jpg');
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -99,7 +99,7 @@ body {
 }
 
 .project-details li::before {
-    content: "☀";
+    content: "🌐";
     position: absolute;
     left: 0;
     color: #00d4ff;
@@ -126,4 +126,118 @@ body {
     text-decoration: none;
     margin: 0 15px;
     font-weight: 600;
+}
+/* --- POWER SWITCH SİSTEMİ (PROJE SAYFALARI İÇİN) --- */
+
+/* 1. Sistem Perdesi (Overlay) Güncellemesi */
+/* Bu kısmı mevcut .overlay kodun varsa onunla değiştir veya en alta ekle */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 1; /* Başlangıçta karanlık */
+    z-index: -1; /* Arkaplanın önünde, yazıların arkasında */
+    transition: opacity 1.5s ease-in-out;
+    pointer-events: none;
+}
+
+/* Sistem açıkken perdenin durumu */
+body.system-on .overlay {
+    opacity: 0.3; 
+}
+
+/* 2. Düğme Konteynırı */
+.power-switch-container {
+    position: fixed;
+    top: 30px;
+    right: 50px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.switch-text {
+    font-size: 15px;
+    font-weight: bold;
+    color: #00d4ff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 120px;
+    height: 60px;
+}
+
+.switch input { opacity: 0; width: 0; height: 0; }
+
+/* 3. FOTOĞRAFLI SLIDER (Yollar ../../ ile düzeltildi) */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    transition: 0.4s ease-in-out;
+    /* İki klasör dışarı çıkıp photos'a girer */
+    background-image: url('../../photos/plugin.png'); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Tıklandığında resim değişimi */
+input:checked + .slider {
+    background-image: url('../../photos/plugout.png');
+    filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.6));
+}
+/* Ana Kapsayıcı */
+.project-light-tracker {
+    display: flex !important;
+    align-items: center; /* Dikeyde ortalar, metinle hizalar */
+    gap: 35px; /* Fotoğraf ve metin arası boşluk */
+    margin: 20px 0;
+    width: 100%;
+    background: transparent; /* Arka plan çakışmasını önler */
+}
+
+/* SOL TARAF: Görsel Kutusu */
+.tracker-image {
+    flex: 0 0 400px; /* Görsel kutusunun genişliğini buradan sabitleyebilirsiniz */
+}
+
+.tracker-image img {
+    width: 100% !important;
+    object-fit: cover; /* Görseli bozmadan kutuya sığdırır */
+    height: 250px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+/* SAĞ TARAF: Metin Kutusu */
+.tracker-description {
+    flex: 1; /* Kalan tüm alanı metne ayırır */
+    color: white;
+    line-height: 1.8;
+}
+
+/* Mobil cihazlar için alt alta gelme ayarı */
+@media (max-width: 850px) {
+    .project-light-tracker {
+        flex-direction: column;
+        text-align: center;
+    }
+    .tracker-image {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+    .tracker-image img {
+        height: auto; /* Mobilde orijinal orana döner */
+    }
 }

@@ -3,7 +3,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../../photos/arkaplan.jpg');
+    background-image: url('../../photos/arkaplan.jpg');
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -73,10 +73,184 @@ blockquote {
 
 .project-details ul { list-style: none; padding: 0; }
 .project-details li { margin-bottom: 10px; padding-left: 25px; position: relative; }
-.project-details li::before { content: "📊"; position: absolute; left: 0; }
+.project-details li::before { content: "🌐"; position: absolute; left: 0; }
 
 .project-images img { width: 100%; border-radius: 15px; margin: 40px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 
 /* Footer */
 .footer { background: rgba(0, 0, 0, 0.95); padding: 30px 0; text-align: center; margin-top: auto; }
 .social-links a { color: #00d4ff; text-decoration: none; margin: 0 15px; font-weight: 600; }
+/* --- POWER SWITCH SİSTEMİ (PROJE SAYFALARI İÇİN) --- */
+
+/* 1. Sistem Perdesi (Overlay) Güncellemesi */
+/* Bu kısmı mevcut .overlay kodun varsa onunla değiştir veya en alta ekle */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 1; /* Başlangıçta karanlık */
+    z-index: -1; /* Arkaplanın önünde, yazıların arkasında */
+    transition: opacity 1.5s ease-in-out;
+    pointer-events: none;
+}
+
+/* Sistem açıkken perdenin durumu */
+body.system-on .overlay {
+    opacity: 0.3; 
+}
+
+/* 2. Düğme Konteynırı */
+.power-switch-container {
+    position: fixed;
+    top: 30px;
+    right: 50px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.switch-text {
+    font-size: 15px;
+    font-weight: bold;
+    color: #00d4ff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 120px;
+    height: 60px;
+}
+
+.switch input { opacity: 0; width: 0; height: 0; }
+
+/* 3. FOTOĞRAFLI SLIDER (Yollar ../../ ile düzeltildi) */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    transition: 0.4s ease-in-out;
+    /* İki klasör dışarı çıkıp photos'a girer */
+    background-image: url('../../photos/plugin.png'); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Tıklandığında resim değişimi */
+input:checked + .slider {
+    background-image: url('../../photos/plugout.png');
+    filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.6));
+}
+/* Başlık ve PDF Butonunu Yan Yana Getiren Kapsayıcı */
+.project-header-row {
+    display: flex;
+    justify-content: space-between; /* Başlık sola, buton sağa */
+    align-items: center;
+    border-bottom: 2px solid rgba(0, 212, 255, 0.3);
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+}
+
+/* Başlık ayarını sıfırlıyoruz (Çünkü project-details içinde margin-top olabilir) */
+.project-header-row h2 {
+    margin: 0;
+    border-left: 5px solid #00d4ff;
+    padding-left: 20px;
+}
+
+/* PDF Buton Tasarımı */
+.pdf-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    background: rgba(0, 212, 255, 0.1);
+    color: #00d4ff;
+    padding: 10px 18px;
+    border: 1px solid #00d4ff;
+    border-radius: 30px; /* Oval tasarım */
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.pdf-button:hover {
+    background: #00d4ff;
+    color: #000;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.pdf-icon {
+    font-size: 1.2rem;
+}
+
+/* Mobilde alt alta gelmesi için */
+@media (max-width: 600px) {
+    .project-header-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .photos-burglary_datas img {
+        width: 100%;
+        margin: 20px 0;
+    }
+    .photos-burglary_matlab img {
+        width: 100%;
+    }
+}
+/* Görselin içinde bulunduğu kutu */
+.photos-burglary_datas {
+    display: flex;
+    justify-content: auto; /* Görseli yatayda ortalar */
+    margin: 30px 0; /* Alt ve üstten boşluk bırakır */
+    width: 100%;
+ 
+}
+
+/* Görselin kendisi */
+.photos-burglary_datas img {
+    /* GENİŞLİK: %100 yaparsan bulunduğu kabı doldurur, 
+       sabit bir değer istersen 600px gibi bir rakam verebilirsin */
+    width: 900px; 
+    
+    /* YÜKSEKLİK: 'auto' oranını korur. 
+       Dikeyde uzatmak istersen 400px gibi bir değer verip object-fit ekleyebilirsin */
+    height: auto; 
+    
+    max-width: 900px; /* Çok büyük ekranlarda görselin aşırı yayılmasını engeller */
+    
+    /* Görselin netliğini ve kalitesini koruması için */
+    object-fit: contain; 
+    
+
+}
+.photos-burglary_matlab {
+    display: flex;
+    /* justify-content: center; komutu flex içindeki öğeyi yatayda ortalar */
+    justify-content: center; 
+    /* margin: 30px auto; üst-alt 30px bırakır, sağ-solu otomatik dengeler */
+    margin: 30px 0; 
+    width: 100%;
+}
+
+/* Görselin kendisi */
+.photos-burglary_matlab img {
+    width: 700px; 
+    height: auto; 
+    max-width: 900px; 
+    object-fit: contain; 
+    
+}
+
+
+
