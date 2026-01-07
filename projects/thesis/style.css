@@ -79,8 +79,9 @@ body {
 
 .project-details h2 {
     color: #00d4ff;
-    border-bottom: 2px solid #00d4ff;
-    display: inline-block;
+    border-left: 4px solid #00d4ff;
+    padding-left: 15px;
+    margin-top: 30px;
     margin-bottom: 20px;
 }
 
@@ -197,16 +198,6 @@ input:checked + .slider {
     margin-top: -30px;
 }
 
-/* Mobilde alt alta gelmesi için */
-@media (max-width: 768px) {
-    .project-main-content {
-        flex-direction: column;
-    }
-    .project-images-vertical {
-        flex: 0 0 auto;
-        width: 100%;
-    }
-}
 
 /* LIDAR Görsellerini Yan Yana Getiren Kapsayıcı */
 .project-LIDAR {
@@ -234,4 +225,127 @@ input:checked + .slider {
     transition: transform 0.3s ease;
 }
 
+/* Mobilde alt alta gelmesi için */
+/* ==========================================================================
+   THESIS SAYFASI MOBIL DUZENLEME (RESPONSIVE)
+   ========================================================================== */
+@media (max-width: 768px) {
+    
+    /* 1. Navbar ve Başlık Alanı Düzenleme */
+    .navbar {
+        height: auto;
+        padding: 60px 20px 20px 20px; /* Power switch için yer açtık */
+        position: relative;
+    }
 
+    .header-container {
+        flex-direction: column;
+        width: 100%;
+        gap: 15px;
+        text-align: center;
+    }
+
+    /* Main Page (Back Button) tek satıra sığsın */
+    .back-button {
+        width: 80%;
+        max-width: 200px;
+        font-size: 0.9rem;
+        padding: 8px 12px;
+        white-space: nowrap; /* Metnin kırılmasını önler */
+        margin-top: 20px ;
+    }
+
+    .header-info h1 {
+        font-size: 1.5rem; /* Başlığı küçülttük */
+        line-height: 1.2;
+        margin: 0;
+    }
+
+    .header-subtitle {
+        font-size: 0.9rem;
+    }
+
+    /* 2. Power Switch (Slider) Küçültme ve Ortalama */
+    .power-switch-container {
+        position: absolute;
+        top: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        flex-direction: row; /* Yazıyı yanına alır */
+        align-items: center;
+        gap: 8px;
+        width: fit-content;
+    }
+
+    .switch-text {
+        font-size: 10px;
+        margin: 0;
+        white-space: nowrap;
+    }
+
+    .switch {
+        width: 80px;
+        height: 40px;
+    }
+
+    /* 3. İçerik ve Yazı Alanı */
+    .project-details {
+        padding: 20px;
+        width: 95%;
+        box-sizing: border-box;
+    }
+
+    /* Metin ve yanındaki dikey fotoğraf alanı */
+    .project-main-content {
+        flex-direction: column !important; /* Alt alta al */
+        align-items: center;
+    }
+
+    .project-images-vertical {
+        width: 100%;
+        flex: none;
+    }
+
+    .project-images-vertical img {
+        height: 300px; /* Mobilde daha belirgin bir yükseklik */
+        width: 100% !important;
+    }
+
+    .project-description {
+        margin-top: 20px; /* -30px olan payı mobilde düzelttik */
+    }
+
+    /* 4. LIDAR FOTOĞRAFLARI (İnce kalma sorununu çözer) */
+    .project-LIDAR {
+        flex-direction: column !important; /* Yan yana durmaya çalışma, alt alta geç */
+        gap: 30px;
+        width: 100%;
+    }
+
+    .lidar-item {
+        width: 100%;
+    }
+
+    .lidar-item img {
+        height: 350px; /* İnce kalmaması için yüksekliği artırdık */
+        width: 100%;
+        object-fit: cover; /* Görüntünün sünmesini önler */
+    }
+
+    /* Sayfadaki diğer tüm genel fotoğraflar (width: 30% olanları düzeltir) */
+    .project-images img {
+        width: 100%; /* Mobilde tam genişlik */
+        height: auto;
+    }
+}
+
+/* Tablet ve küçük masaüstü için ara ayar (Görsellerin incelmemesi için) */
+@media (min-width: 769px) and (max-width: 1100px) {
+    .project-LIDAR {
+        width: 95%;
+        gap: 30px;
+    }
+    .header-container {
+        width: 95%;
+    }
+}

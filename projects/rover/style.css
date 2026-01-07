@@ -356,3 +356,121 @@ input:checked + .slider {
     box-shadow: 0 15px 40px rgba(0,0,0,0.5);
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
+@media (max-width: 768px) {
+    
+    /* 1. Navbar ve Başlık Alanı Düzenleme (STANDART ŞABLONUN) */
+    .navbar {
+        height: auto;
+        padding: 60px 20px 20px 20px; 
+        position: relative;
+    }
+
+    .header-container {
+        flex-direction: column;
+        width: 100%;
+        gap: 15px;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    /* "Main Page" butonu sığsın */
+    .back-button {
+        width: 80%;
+        max-width: 200px;
+        font-size: 0.9rem;
+        padding: 8px 12px;
+        white-space: nowrap; 
+        margin-top: 20px;
+    }
+
+    .header-info h1 {
+        font-size: 1.5rem;
+        line-height: 1.2;
+    }
+
+    /* 2. Power Switch (Slider) - Yazı Yan Yana ve Ortalı */
+    .power-switch-container {
+        position: absolute;
+        top: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        flex-direction: row; 
+        align-items: center;
+        gap: 8px;
+        width: fit-content;
+    }
+
+    .switch-text {
+        font-size: 10px;
+        margin: 0;
+        white-space: nowrap;
+    }
+
+    .switch {
+        width: 80px;
+        height: 40px;
+    }
+
+    /* 3. Sola Kayma ve Kutu Düzenlemesi */
+    .content-wrapper {
+        padding: 20px 10px;
+    }
+
+    .project-details {
+        width: 95%;
+        padding: 20px;
+        margin: 0 auto; /* Sayfayı ortalar, sola kaymayı bitirir */
+        box-sizing: border-box;
+    }
+
+    /* 4. 3D Model ve Video Alanı (Alt alta geçiş) */
+    .split-project-row {
+        flex-direction: column !important;
+        gap: 20px;
+        width: 100%;
+        align-items: center;
+    }
+
+    #model-container, .video-side-container {
+        width: 100% !important;
+        flex: none;
+        height: 300px; /* Mobilde daha dengeli bir yükseklik */
+    }
+
+    /* 5. Ekip ve Araç Fotoğrafları (Görsel Galeri) */
+    .rover-gallery-row {
+        flex-direction: column !important;
+        gap: 20px;
+        width: 100%;
+    }
+
+    .rover-team, .rover-vehicle {
+        width: 100%;
+    }
+
+    .rover-team img, .rover-vehicle img {
+        height: 250px; /* Mobilde dolgun görünmesi için */
+        width: 100% !important;
+        object-fit: cover;
+    }
+
+    /* 6. Ödül Fotoğrafı (Full Width) */
+    .full-width-award {
+        width: 100% !important; /* 600px kısıtlamasını mobilde kaldırır */
+        margin: 20px auto;
+    }
+
+    .full-width-award img {
+        width: 100%;
+    }
+}
+
+/* Tablet ara ayarı */
+@media (min-width: 769px) and (max-width: 1100px) {
+    .project-details {
+        width: 95%;
+    }
+    .full-width-award {
+        width: 90%;
+    }
+}

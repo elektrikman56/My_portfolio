@@ -275,3 +275,112 @@ input:checked + .slider {
     margin-top: 10px; /* Görsel ile altındaki ilk öğe arası mesafe */
 }
 
+/* ==========================================================================
+   HOSPITAL PROJECT - MOBİL DÜZENLEME (@media)
+   ========================================================================== */
+@media (max-width: 768px) {
+    
+    /* 1. Navbar ve Başlık Alanı Düzenleme (BAZ KODUNLA AYNI) */
+    .navbar {
+        height: auto;
+        padding: 60px 20px 20px 20px; 
+        position: relative;
+    }
+
+    .header-container {
+        flex-direction: column;
+        width: 100%;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .back-button {
+        width: 80%;
+        max-width: 200px;
+        font-size: 0.9rem;
+        padding: 8px 12px;
+        white-space: nowrap; 
+        margin-top: 20px ;
+    }
+
+    .header-info h1 {
+        font-size: 1.5rem;
+        line-height: 1.2;
+        margin: 0;
+    }
+
+    .header-subtitle {
+        font-size: 0.9rem;
+    }
+
+    /* 2. Power Switch (Slider) (BAZ KODUNLA AYNI - YAZI YANDA) */
+    .power-switch-container {
+        position: absolute;
+        top: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        flex-direction: row; 
+        align-items: center;
+        gap: 8px;
+        width: fit-content;
+    }
+
+    .switch-text {
+        font-size: 10px;
+        margin: 0;
+        white-space: nowrap;
+    }
+
+    .switch {
+        width: 80px;
+        height: 40px;
+    }
+
+    /* 3. İçerik ve Yazı Alanı (BAZ KODUNLA AYNI) */
+    .project-details {
+        padding: 20px;
+        width: 95%;
+        box-sizing: border-box;
+        margin: 0 auto; /* Kutuyu ortada tutar, sola kaymayı önler */
+    }
+
+    /* Hospital Sayfasına Özel: Yan yana olan kısmı alt alta alma */
+    .hospital-project-row {
+        flex-direction: column !important;
+        gap: 20px;
+        width: 100%;
+    }
+
+    .hospital-image {
+        width: 100% !important;
+        flex: none;
+    }
+
+    /* 4. Görseller (BAZ KODUNDAKİ GİBİ GENEL AYAR) */
+    .project-images {
+        width: 100% !important; /* 600px kısıtlamasını mobilde kaldırır */
+        margin: 20px auto;
+    }
+
+    .project-images img, .hospital-image img {
+        width: 100% !important;
+        height: auto;
+        display: block;
+    }
+
+    /* Baz kodundaki genel resim ayarı */
+    .project-images img {
+        width: 100%; 
+        height: auto;
+    }
+}
+
+/* Tablet Ayarı (BAZ KODUNLA AYNI) */
+@media (min-width: 769px) and (max-width: 1100px) {
+    .header-container {
+        width: 95%;
+    }
+    .project-images {
+        width: 90%;
+    }
+}

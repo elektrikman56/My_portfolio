@@ -264,3 +264,115 @@ input:checked + .slider {
     transition: 0.3s;
 }
 .social-links a:hover { color: white; text-shadow: 0 0 8px #00d4ff; }
+/* ==========================================================================
+   7. MOBIL UYUMLULUK (RESPONSIVE) - GÜNCEL VE TAM HALİ
+   ========================================================================== */
+@media (max-width: 768px) {
+    
+    /* Navbar'ı esnek yap ve içindeki her şeyi dikeyde ortala */
+    .navbar {
+        position: relative; /* Üst üste binmeyi engeller */
+        height: auto;
+        padding: 70px 20px 20px 20px; /* Power switch için üstte boşluk bıraktık */
+        flex-direction: column;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Logo ve Yazı konteynırını tam merkeze zorla */
+    .header-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+        width: 100%;
+        margin: 0 auto;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Logodaki olası kaymaları sıfırla */
+    .nav-logo {
+        width: 80px;
+        height: 80px;
+        margin: 0 !important; /* Sağa veya sola kaymayı engelle */
+    }
+
+    /* Başlık ve alt metinleri ortala */
+    .header-info {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    .header-info h1 {
+        font-size: 1.5rem;
+        line-height: 1.2;
+        margin: 0;
+    }
+
+    /* İletişim linklerini ortalı ve düzgün diz */
+    .contact-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-top: 10px;
+        font-size: 0.85rem;
+    }
+
+    /* Ayırıcı çizgileri ( | ) mobilde daha zarif yap */
+    .separator {
+        margin: 0 8px;
+    }
+
+    /* Power Switch'i sayfanın en üstüne ve tam matematiksel merkeze al */
+    .power-switch-container {
+        position: absolute;
+        top: 15px;
+        left: 50%;
+        transform: translateX(-50%); /* Kaymayı engelleyen kritik satır */
+        right: auto;
+        width: auto;
+        flex-direction: row;
+        gap: 8px;
+        z-index: 1001;
+    }
+
+    .switch-text {
+        font-size: 11px;
+    }
+
+    .switch {
+        width: 70px; /* Mobilde daha kibar bir boyut */
+        height: 35px;
+    }
+
+    /* Proje kartlarını mobilde tek sütun yap */
+    .projects-container {
+        margin-top: 40px;
+        padding: 20px;
+        gap: 40px;
+        justify-content: center;
+    }
+
+    .project-card {
+        flex: 0 1 100%; /* Kartlar ekranı kaplasın */
+        height: 220px;
+        max-width: 400px; /* Çok geniş ekranlı telefonlarda aşırı yayılmasın */
+    }
+
+    /* Mobilde hover (büyüme) etkisini azalt (ekran dışına taşmaması için) */
+    .project-card:hover {
+        transform: scale(1.05);
+    }
+
+    /* Footer'ı mobil için daralt */
+    .footer {
+        padding: 30px 15px;
+    }
+}

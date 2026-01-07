@@ -252,5 +252,119 @@ input:checked + .slider {
     
 }
 
+/* ==========================================================================
+   BURGLARY ALARM - MOBİL DÜZENLEME (@media)
+   ========================================================================== */
+@media (max-width: 768px) {
+    
+    /* 1. Navbar ve Başlık Alanı (BAZ ŞABLONUN) */
+    .navbar {
+        height: auto;
+        padding: 60px 20px 20px 20px; 
+        position: relative;
+    }
 
+    .header-container {
+        flex-direction: column;
+        width: 100%;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .back-button {
+        width: 80%;
+        max-width: 200px;
+        font-size: 0.9rem;
+        padding: 8px 12px;
+        white-space: nowrap; 
+        margin-top: 20px;
+    }
+
+    .header-info h1 {
+        font-size: 1.5rem;
+        line-height: 1.2;
+        margin: 0;
+    }
+
+    .header-subtitle {
+        font-size: 0.9rem;
+    }
+
+    /* 2. Power Switch (Slider) - Yazı Yanda ve Ortalı */
+    .power-switch-container {
+        position: absolute;
+        top: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        flex-direction: row; 
+        align-items: center;
+        gap: 8px;
+        width: fit-content;
+    }
+
+    .switch-text {
+        font-size: 10px;
+        margin: 0;
+        white-space: nowrap;
+    }
+
+    .switch {
+        width: 80px;
+        height: 40px;
+    }
+
+    /* 3. Sola Kayma ve Kutu Düzenlemesi */
+    .content-wrapper {
+        padding: 20px 10px;
+    }
+
+    .project-details {
+        padding: 20px;
+        width: 95%;
+        margin: 0 auto; /* Sayfayı ortalar, sola kaymayı bitirir */
+        box-sizing: border-box;
+    }
+
+    /* 4. PDF Butonu ve Başlık Satırı */
+    .project-header-row {
+        flex-direction: column !important; /* Başlık ve butonu alt alta alır */
+        align-items: center;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .pdf-button {
+        width: fit-content;
+        font-size: 0.8rem;
+        padding: 8px 15px;
+    }
+
+    /* 5. Sabit Genişlikli Görseller (900px ve 700px Sorunu) */
+    /* Mobilde sabit 900px içeriği sola/sağa kaçırır, bunları temizliyoruz */
+    .photos-burglary_datas img, 
+    .photos-burglary_matlab img {
+        width: 100% !important;
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .photos-burglary_datas,
+    .photos-burglary_matlab {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Tablet ve küçük masaüstü ara ayarı */
+@media (min-width: 769px) and (max-width: 1100px) {
+    .project-details {
+        width: 95%;
+    }
+    .photos-burglary_datas img, 
+    .photos-burglary_matlab img {
+        width: 100%;
+    }
+}
 

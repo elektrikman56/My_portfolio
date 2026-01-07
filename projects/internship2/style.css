@@ -264,11 +264,122 @@ input:checked + .slider {
 }
 
 /* Mobil Uyumluluk */
+/* ==========================================================================
+   INTERN 2 - MOBİL DÜZENLEME (@media)
+   ========================================================================== */
 @media (max-width: 768px) {
-    .project-triple-row {
-        flex-direction: column;
-    }
-    .triple-item img {
+    
+    /* 1. Navbar ve Başlık Alanı Düzenleme */
+    .navbar {
         height: auto;
+        padding: 60px 20px 20px 20px; /* Power switch için yer açtık */
+        position: relative;
+    }
+
+    .header-container {
+        flex-direction: column;
+        width: 100%;
+        gap: 15px;
+        text-align: center;
+    }
+
+    /* Main Page (Back Button) tek satıra sığsın */
+    .back-button {
+        width: 80%;
+        max-width: 200px;
+        font-size: 0.9rem;
+        padding: 8px 12px;
+        white-space: nowrap; 
+        margin-top: 20px;
+    }
+
+    .header-info h1 {
+        font-size: 1.5rem;
+        line-height: 1.2;
+        margin: 0;
+    }
+
+    .header-subtitle {
+        font-size: 0.9rem;
+    }
+
+    /* 2. Power Switch (Yazı ve Buton Yan Yana) */
+    .power-switch-container {
+        position: absolute;
+        top: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        flex-direction: row; /* Yazıyı butonun yanına çeker */
+        align-items: center;
+        gap: 8px;
+        width: fit-content;
+    }
+
+    .switch-text {
+        font-size: 10px;
+        margin: 0;
+        white-space: nowrap;
+    }
+
+    .switch {
+        width: 80px;
+        height: 40px;
+    }
+
+    /* 3. İçerik ve Yazı Alanı */
+    .project-details {
+        padding: 20px;
+        width: 95%;
+        box-sizing: border-box;
+    }
+
+    /* Metin ve yanındaki dikey fotoğraf alanı */
+    .project-main-content {
+        flex-direction: column !important; /* Alt alta al */
+        align-items: center;
+    }
+
+    .project-images-vertical {
+        width: 100%;
+        flex: none;
+    }
+
+    .project-images-vertical img {
+        height: auto; /* Orantılı büyüme */
+        width: 100% !important;
+    }
+
+    /* 4. 3'lü Fotoğraf Grubu (İnce kalma sorununu çözer) */
+    .project-triple-row {
+        flex-direction: column !important; /* Alt alta geç */
+        gap: 25px;
+        width: 100%;
+    }
+
+    .triple-item {
+        width: 100%;
+    }
+
+    .triple-item img {
+        height: 300px; /* Mobilde dolgun durması için sabit yükseklik */
+        width: 100% !important;
+        object-fit: cover; /* Sünmeyi önler */
+    }
+
+    /* Sayfadaki diğer tüm genel fotoğraflar */
+    .project-images img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* Tablet ve küçük masaüstü ara ayarı */
+@media (min-width: 769px) and (max-width: 1100px) {
+    .project-triple-row {
+        width: 95%;
+        gap: 15px;
+    }
+    .header-container {
+        width: 95%;
     }
 }
